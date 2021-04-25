@@ -1,3 +1,5 @@
+using Pkg; Pkg.activate(".")
+Pkg.add("Mux")       #Do this as many times as you need to, changing the string (containing the package name) every time.
 using Mux
 
 @app test = (

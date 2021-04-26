@@ -3,4 +3,4 @@ Pkg.add("Pluto")       #Do this as many times as you need to, changing the strin
 import Pluto
 
 @info "Launching Pluto"
-@async Pluto.run(host = "0.0.0.0", port = hostparse(Int,ARGS[1]))
+Pluto.run(host = "0.0.0.0", port = hostparse(Int,ARGS[1]))

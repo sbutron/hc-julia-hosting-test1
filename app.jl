@@ -1,3 +1,4 @@
+Pkg.status()
 import Pluto
 
 @info "Launching Pluto"

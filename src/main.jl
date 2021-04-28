@@ -64,7 +64,6 @@ include("./visualization.jl")
 
 
 import Pluto
-import Base.Threads
 
 
 @info "Launching Pluto"

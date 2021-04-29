@@ -10,16 +10,18 @@ begin
 	using Plots
 	using Distributions
 	using PlutoUI
+	md"""Loading dependencies"""
 end
 
 # ╔═╡ 6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
-md"""# Building the Simulation"""
+md"""# Building the Simulation
+In this example we're simulating an MPPC with an amplifier circuit."""
 
 # ╔═╡ 86a10170-a8f3-11eb-0abf-5d38a978a61d
 begin
 env = Environment(
     time_start = 0,
-    time_end = 10e-6,
+    time_end = 5e-6,
     time_step = 100e-12,
     verbose = false,
     plot = true,
@@ -43,8 +45,8 @@ begin
 						env,
 						pulse_shape = :square,
 						photons_per_pulse = 2000,
-						pulse_width = 4e-6,
-						delay = 5e-6,
+						pulse_width = 2e-6,
+						delay = 2.5e-6,
 						frequency = 1,
 						wavelength_distribution = Normal(470e-9,1e-9),
 						distribution_x = Normal(0, 0.5e-3),
@@ -97,8 +99,8 @@ end
 
 
 # ╔═╡ Cell order:
-# ╠═0bd27af6-e419-4bff-86ff-fba46de2c0ba
 # ╟─6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
+# ╠═0bd27af6-e419-4bff-86ff-fba46de2c0ba
 # ╠═86a10170-a8f3-11eb-0abf-5d38a978a61d
 # ╠═bef78c74-ae9e-437e-b850-4c64a883268d
 # ╠═22da75b2-498e-4233-831e-fe2a28c4d9c2

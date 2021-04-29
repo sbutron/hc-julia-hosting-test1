@@ -4,12 +4,22 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : missing
+        el
+    end
+end
+
 # ╔═╡ 0bd27af6-e419-4bff-86ff-fba46de2c0ba
 begin
 	using PhotoMC
 	using Plots
 	using Distributions
 	using PlutoUI
+	gr()
 	md"""Loading dependencies"""
 end
 
@@ -17,17 +27,31 @@ end
 md"""# Building the Simulation
 In this example we're simulating an MPPC with an amplifier circuit."""
 
+# ╔═╡ dbb01168-bb36-4706-85eb-4b83862058f7
+md"""# Plotting the results
+Try changing the parameters.
+
+Light levels:
+$(@bind photon_input Slider(1:10000, default=2000))
+
+Pulse Width:
+$(@bind pw_input Slider(1:5000, default=2000))
+"""
+
+
 # ╔═╡ 86a10170-a8f3-11eb-0abf-5d38a978a61d
 begin
-env = Environment(
-    time_start = 0,
-    time_end = 5e-6,
-    time_step = 100e-12,
-    verbose = false,
-    plot = true,
-    save_path = @__DIR__
-    )
-md"""We initialize the simulation environment."""
+	photons_per_pulse = photon_input
+	pulse_width = pw_input * 1e-9
+	env = Environment(
+		time_start = 0,
+		time_end = 5e-6,
+		time_step = 100e-12,
+		verbose = false,
+		plot = true,
+		save_path = @__DIR__
+		)
+	md"""Initialize the simulation environment."""
 end
 
 # ╔═╡ bef78c74-ae9e-437e-b850-4c64a883268d
@@ -36,7 +60,7 @@ begin
 							env, 
 							position = Coordinate(0,0)
 						)
-md"""We add S13360-3050CS at position (0,0) to the environment"""
+md"""Add S13360-3050CS (MPPC) to the environment"""
 end
 
 # ╔═╡ 22da75b2-498e-4233-831e-fe2a28c4d9c2
@@ -44,8 +68,8 @@ begin
 	ls = FocusedSource(
 						env,
 						pulse_shape = :square,
-						photons_per_pulse = 2000,
-						pulse_width = 2e-6,
+						photons_per_pulse = photons_per_pulse,
+						pulse_width = pulse_width,
 						delay = 2.5e-6,
 						frequency = 1,
 						wavelength_distribution = Normal(470e-9,1e-9),
@@ -80,14 +104,9 @@ begin
 	md"""Run the simulation environment"""
 end
 
-# ╔═╡ dbb01168-bb36-4706-85eb-4b83862058f7
-md"""# Plotting the results
-"""
-
-
 # ╔═╡ db6f19dc-f632-45ec-9651-396a58c47a70
 begin
-	plot(env.stats_time, 
+	p = plot(env.stats_time, 
 		env.schematic.stats_probe_outputs[:,2], 
 		label = env.schematic.probe_labels[2],
 		xlabel = "Time(s)",
@@ -96,7 +115,13 @@ begin
 end
 
 # ╔═╡ a74fcb64-db7c-47f4-a5ed-f44595dfd54c
+md"""
+## Simulation parameters:
 
+Photons per pulse: $photons_per_pulse photons
+
+Pulse width: $pw_input ns
+"""
 
 # ╔═╡ Cell order:
 # ╟─6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
@@ -106,6 +131,6 @@ end
 # ╠═22da75b2-498e-4233-831e-fe2a28c4d9c2
 # ╠═43f4d5c0-1704-4ac0-967d-ca44e2248ed3
 # ╠═e62b2af5-acf4-44ea-8ed9-263b7c957da1
-# ╟─dbb01168-bb36-4706-85eb-4b83862058f7
-# ╠═db6f19dc-f632-45ec-9651-396a58c47a70
+# ╠═dbb01168-bb36-4706-85eb-4b83862058f7
+# ╟─db6f19dc-f632-45ec-9651-396a58c47a70
 # ╠═a74fcb64-db7c-47f4-a5ed-f44595dfd54c

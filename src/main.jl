@@ -61,10 +61,3 @@ include("./visualization.jl")
 #include("./test.jl")end
 
 @info "Photo MC is ready at Process $(myid())"
-
-
-import Pluto
-
-
-@info "Launching Pluto"
-Pluto.run(host = "0.0.0.0", port = parse(Int,ARGS[1]))

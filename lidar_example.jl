@@ -20,6 +20,12 @@ begin
 	using Plots
 	using PlutoUI
 	md"""Loading dependencies."""
+	
+	# make cells wider
+	html"""<style>
+main {
+    max-width: 1000px;
+"""
 end
 
 # ╔═╡ 91bc1afc-f6c1-4221-b701-ec1e9502be5c
@@ -40,19 +46,19 @@ md"""
 ## Simulation Parameters
 #### Environment Conditions 
 Distance:
-$(@bind distance_input Slider(10:300, default = 50, show_value=true)) m|
+$(@bind distance_input Slider(10:300, default = 50, show_value=true)) m |
 Ambient background:
-$(@bind klux Slider(1:100, default = 50, show_value=true)) klux
-
+$(@bind klux Slider(1:100, default = 50, show_value=true)) klux | 
 Lens Diameter:
-$(@bind lens_dia Slider(1:100, default = 25, show_value=true)) mm
+$(@bind lens_dia Slider(1:100, default = 25, show_value=true)) mm |
+Static FOV:
+$(@bind fov_input Slider(0.1:0.1:1, default = 0.2, show_value=true)) deg. |
 
 #### Laser Parameters
 Laser power:
 $(@bind lpower Slider(1:200, default = 100, show_value=true)) W |
 Laser pulse width:
 $(@bind lwidth Slider(500:30_000, default = 3000, show_value=true)) ps |
-
 Frequency:
 $(@bind lreprate Slider(1:20_000_000, default = 1, show_value=true)) Hz
 
@@ -72,12 +78,12 @@ begin
 	# shared parameters
 	distance = distance_input
 	target_reflectivity = 0.1
-	lens_diameter = float(lens_dia)*1e-3
-	FOV_horizontal_degrees = 0.2
-	FOV_vertical_degrees = 0.2
+	lens_diameter = float(lens_dia)*1e-3 # value is in mm
+	FOV_horizontal_degrees = float(fov_input) 
+	FOV_vertical_degrees = float(fov_input) 
 	min_wavelength = 895e-9
 	max_wavelength = 915e-9
-	ambient_lux = klux * 1e3
+	ambient_lux = klux * 1e3 # value is in k lux
 	lens_transmittance = 0.9
 	extinction_coeff = 0.15
 	laser_power_W = lpower * 1.0
@@ -189,13 +195,13 @@ begin
 		xlims = (0, env.time_end * Constants.c / 2) 
 		xlabel = "Distance (m)"
 	end
-	waveform_laser = plot(env.stats_time, env.light_sources[1].temporal_profile, label = "Laser Profile", xlims = (0,2e-6), xlabel = "Time (s)", ylabel ="Photons")
-	waveform_laser_actual = plot(env.stats_time, env.light_sources[1].stats_photons_emitted, label = "Laser Emission", xlims = (0,2e-6), xlabel = "Time (s)", ylabel ="Photons")
+	waveform_laser = plot(env.stats_time, env.light_sources[1].temporal_profile, label = "Laser Profile", xlims = (0,2e-6), xlabel = "Time (s)", ylabel ="Photons", widen = true)
+	waveform_laser_actual = plot(env.stats_time, env.light_sources[1].stats_photons_emitted, label = "Laser Profile", xlims = (0,2e-6), xlabel = "Time (s)", ylabel ="Photons")
 	waveform_apd = plot(xdata, env.schematic.stats_probe_outputs[:,1], label = "S14645-02", xlims = xlims, xlabel = xlabel, ylabel ="Output (V)")
 	
 	waveform_mppc = plot(xdata, env.schematic.stats_probe_outputs[:,2], label = "S13720-1325CS", xlims = xlims, xlabel = xlabel, ylabel ="Output (V)")
 
-    plot(waveform_laser, waveform_apd, waveform_mppc, layout = (3,1), size=(700,800))
+    plot(waveform_apd, waveform_mppc, waveform_laser_actual, layout = (1,3), size=(1000,650))
    
 end
 

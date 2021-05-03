@@ -20,22 +20,47 @@ begin
 	using Distributions
 	using PlutoUI
 	gr()
-	md"""Loading dependencies"""
+	
+md"""Loading dependencies"""
+html"""<style>
+main {
+    max-width: 1000px;
+"""
 end
 
 # ╔═╡ 6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
 md"""# Building the Simulation
 In this example we're simulating an MPPC with an amplifier circuit."""
 
+# ╔═╡ 9d029b7b-f7ae-4125-81e9-f843d542edec
+md"""## How it Works """
+
 # ╔═╡ dbb01168-bb36-4706-85eb-4b83862058f7
-md"""# Plotting the results
+md"""## Running the Simulation
 Try changing the parameters.
 
+### Light Source
 Light levels:
-$(@bind photon_input Slider(1:10000, default=2000))
+$(@bind photon_input Slider(1:10000, default = 2000, show_value = true)) ph/pulse |
+Pulse width:
+$(@bind pw_input Slider(1:5000, default = 2000, show_value = true)) ns |
+Pulse delay:
+$(@bind p_delay Slider(1:10000, default = 5000, show_value = true)) ns 
 
-Pulse Width:
-$(@bind pw_input Slider(1:5000, default=2000))
+Frequency:
+$(@bind p_freq Slider(1:10_000, default = 1, show_value = true)) kHz |
+Wavelength:
+$(@bind p_wavelength Slider(300:900, default = 470, show_value = true)) nm |
+Pulse shape:
+$(@bind p_shape Select(["Square", "Gaussian"]))
+
+
+### Readout Circuit
+Feedback resistance:
+$(@bind rf_input Slider(1:10000, default = 1000, show_value = true)) ohms |
+
+$(@bind go Button("Run Simulation"))
+
 """
 
 
@@ -43,9 +68,14 @@ $(@bind pw_input Slider(1:5000, default=2000))
 begin
 	photons_per_pulse = photon_input
 	pulse_width = pw_input * 1e-9
+	pulse_shape = p_shape == "Square" ? :square : :gaussian
+	pulse_delay = p_delay * 1e-9 # p_delay is in ns
+	rep_rate = p_freq * 1e3 # p_freq is in kHz
+	center_wavelength = p_wavelength * 1e-9 # p_wavelength is in nm
+	r2val = rf_input
 	env = Environment(
 		time_start = 0,
-		time_end = 5e-6,
+		time_end = 10e-6,
 		time_step = 100e-12,
 		verbose = false,
 		plot = true,
@@ -64,15 +94,15 @@ md"""Add S13360-3050CS (MPPC) to the environment"""
 end
 
 # ╔═╡ 22da75b2-498e-4233-831e-fe2a28c4d9c2
-begin
+begin	
 	ls = FocusedSource(
 						env,
-						pulse_shape = :square,
+						pulse_shape = pulse_shape,
 						photons_per_pulse = photons_per_pulse,
 						pulse_width = pulse_width,
-						delay = 2.5e-6,
-						frequency = 1,
-						wavelength_distribution = Normal(470e-9,1e-9),
+						delay = pulse_delay,
+						frequency = rep_rate,
+						wavelength_distribution = Normal(center_wavelength,1e-9),
 						distribution_x = Normal(0, 0.5e-3),
 						distribution_y = Normal(0, 0.5e-3),
 						info="200pW light source"
@@ -82,11 +112,11 @@ end
 
 # ╔═╡ 43f4d5c0-1704-4ac0-967d-ca44e2248ed3
 begin
-	r11 = Resistor_Noisy(env, 50, "R11")
+	r11 = Resistor_Ideal(env, 50, "R11")
 	u1 = OPA846(env)
-	r5 = Resistor_Noisy(env, 51, "R5") 
-	r2 = Resistor_Noisy(env, 1e3, "R2") 
-	r1 = Resistor_Noisy(env, 51, "R51")
+	r5 = Resistor_Ideal(env, 51, "R5") 
+	r2 = Resistor_Ideal(env, r2val, "R2") 
+	r1 = Resistor_Ideal(env, 51, "R51")
 	current_probe = Probe_Current(env, probe_label = "Anode Current")
 	voltage_probe = Oscilloscope_1MΩ(env, probe_label = "Amplifier Voltage")
 	connect!(env, mppc.pin_anode, current_probe.pin_input)
@@ -100,12 +130,14 @@ end
 
 # ╔═╡ e62b2af5-acf4-44ea-8ed9-263b7c957da1
 begin
-	simulate!(env)
+	go
+	run = simulate!(env)
 	md"""Run the simulation environment"""
 end
 
 # ╔═╡ db6f19dc-f632-45ec-9651-396a58c47a70
 begin
+	run
 	p = plot(env.stats_time, 
 		env.schematic.stats_probe_outputs[:,2], 
 		label = env.schematic.probe_labels[2],
@@ -124,13 +156,14 @@ Pulse width: $pw_input ns
 """
 
 # ╔═╡ Cell order:
-# ╟─6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
+# ╠═6627f622-6842-4c5d-9eaa-b73f4bbd0ab8
+# ╟─9d029b7b-f7ae-4125-81e9-f843d542edec
 # ╠═0bd27af6-e419-4bff-86ff-fba46de2c0ba
 # ╠═86a10170-a8f3-11eb-0abf-5d38a978a61d
 # ╠═bef78c74-ae9e-437e-b850-4c64a883268d
 # ╠═22da75b2-498e-4233-831e-fe2a28c4d9c2
 # ╠═43f4d5c0-1704-4ac0-967d-ca44e2248ed3
 # ╠═e62b2af5-acf4-44ea-8ed9-263b7c957da1
-# ╠═dbb01168-bb36-4706-85eb-4b83862058f7
+# ╟─dbb01168-bb36-4706-85eb-4b83862058f7
 # ╟─db6f19dc-f632-45ec-9651-396a58c47a70
 # ╠═a74fcb64-db7c-47f4-a5ed-f44595dfd54c

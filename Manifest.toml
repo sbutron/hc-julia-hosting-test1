@@ -65,9 +65,9 @@ version = "0.12.8"
 
 [[Compat]]
 deps = ["Base64", "Dates", "DelimitedFiles", "Distributed", "InteractiveUtils", "LibGit2", "Libdl", "LinearAlgebra", "Markdown", "Mmap", "Pkg", "Printf", "REPL", "Random", "SHA", "Serialization", "SharedArrays", "Sockets", "SparseArrays", "Statistics", "Test", "UUIDs", "Unicode"]
-git-tree-sha1 = "ac4132ad78082518ec2037ae5770b6e796f7f956"
+git-tree-sha1 = "0a817fbe51c976de090aa8c997b7b719b786118d"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "3.27.0"
+version = "3.28.0"
 
 [[CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -75,9 +75,9 @@ uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 
 [[Configurations]]
 deps = ["Crayons", "ExproniconLite", "OrderedCollections", "TOML"]
-git-tree-sha1 = "fecec31dbbe3d545d9036b07aa8d012dfa1ca487"
+git-tree-sha1 = "22f5e05d431a6f933f4de3740c9fc0991324438c"
 uuid = "5218b696-f38b-4ac9-8b61-a12ec717816d"
-version = "0.15.2"
+version = "0.15.3"
 
 [[Contour]]
 deps = ["StaticArrays"]
@@ -534,7 +534,7 @@ version = "1.1.0"
 
 [[PhotoMC]]
 deps = ["ACME", "BenchmarkTools", "Colors", "ConvexBodyProximityQueries", "Dates", "DelimitedFiles", "Distributed", "Distributions", "Downloads", "LinearAlgebra", "Plots", "PoissonRandom", "Polynomials", "ProgressMeter", "Random", "RandomNumbers", "SparseArrays", "StaticArrays", "ThreadTools", "XLSX"]
-git-tree-sha1 = "5afc1afc6b2303568301b746812fb3b045a9e764"
+git-tree-sha1 = "0bcb60c05a479735494ddfbe965e0fc4223482f8"
 repo-rev = "master"
 repo-url = "https://github.com/sbutron/PhotoMC.jl"
 uuid = "8a70790b-5fed-4f35-9cb7-33f7fac92a76"

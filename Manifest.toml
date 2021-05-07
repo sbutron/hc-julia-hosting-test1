@@ -534,11 +534,11 @@ version = "1.1.0"
 
 [[PhotoMC]]
 deps = ["ACME", "BenchmarkTools", "Colors", "ConvexBodyProximityQueries", "Dates", "DelimitedFiles", "Distributed", "Distributions", "Downloads", "LinearAlgebra", "Plots", "PoissonRandom", "Polynomials", "ProgressMeter", "Random", "RandomNumbers", "SparseArrays", "StaticArrays", "ThreadTools", "XLSX"]
-git-tree-sha1 = "af158fec1a27c8b3a19a46cac49f3114aed4cf37"
+git-tree-sha1 = "988665a99d9c2d1e9a907581a63fe41cab513fc3"
 repo-rev = "master"
 repo-url = "https://github.com/sbutron/PhotoMC.jl"
 uuid = "8a70790b-5fed-4f35-9cb7-33f7fac92a76"
-version = "0.1.7"
+version = "0.1.8"
 
 [[Pixman_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]

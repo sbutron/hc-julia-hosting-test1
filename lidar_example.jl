@@ -49,6 +49,7 @@ Distance:
 $(@bind distance_input Slider(10:300, default = 50, show_value=true)) m |
 Ambient background:
 $(@bind klux Slider(1:100, default = 50, show_value=true)) klux | 
+
 Lens Diameter:
 $(@bind lens_dia Slider(1:100, default = 25, show_value=true)) mm |
 Static FOV:
@@ -59,14 +60,13 @@ Laser power:
 $(@bind lpower Slider(1:200, default = 100, show_value=true)) W |
 Laser pulse width:
 $(@bind lwidth Slider(500:30_000, default = 3000, show_value=true)) ps |
+
 Frequency:
 $(@bind lreprate Slider(1:20_000_000, default = 1, show_value=true)) Hz
 
 #### Options
 X-axis:
 $(@bind xaxis_type Select(["Time", "Distance"]))
-
-
 $(@bind manualrun Button("Simulate"))
 """
 
@@ -201,7 +201,7 @@ begin
 	
 	waveform_mppc = plot(xdata, env.schematic.stats_probe_outputs[:,2], label = "S13720-1325CS", xlims = xlims, xlabel = xlabel, ylabel ="Output (V)")
 
-    plot(waveform_apd, waveform_mppc, waveform_laser_actual, layout = (1,3), size=(1000,650))
+    plot(waveform_apd, waveform_mppc, waveform_laser_actual, layout = (3,1), size=(1000,650))
    
 end
 

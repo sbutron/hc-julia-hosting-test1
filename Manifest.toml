@@ -75,9 +75,9 @@ uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 
 [[Configurations]]
 deps = ["Crayons", "ExproniconLite", "OrderedCollections", "TOML"]
-git-tree-sha1 = "22f5e05d431a6f933f4de3740c9fc0991324438c"
+git-tree-sha1 = "b8486a417456d2fbbe2af13e24cef459c9f42429"
 uuid = "5218b696-f38b-4ac9-8b61-a12ec717816d"
-version = "0.15.3"
+version = "0.15.4"
 
 [[Contour]]
 deps = ["StaticArrays"]
@@ -473,9 +473,9 @@ version = "1.1.0"
 
 [[MutableArithmetics]]
 deps = ["LinearAlgebra", "SparseArrays", "Test"]
-git-tree-sha1 = "3301e152b9a208745fad6cd4b068307a5d218a38"
+git-tree-sha1 = "ad9b2bce6021631e0e20706d361972343a03e642"
 uuid = "d8a4904e-b15c-11e9-3269-09a3773c0cb0"
-version = "0.2.18"
+version = "0.2.19"
 
 [[NaNMath]]
 git-tree-sha1 = "bfe47e760d60b82b66b61d2d44128b62e3a369fb"
@@ -534,7 +534,7 @@ version = "1.1.0"
 
 [[PhotoMC]]
 deps = ["ACME", "BenchmarkTools", "Colors", "ConvexBodyProximityQueries", "Dates", "DelimitedFiles", "Distributed", "Distributions", "Downloads", "LinearAlgebra", "Plots", "PoissonRandom", "Polynomials", "ProgressMeter", "Random", "RandomNumbers", "SparseArrays", "StaticArrays", "ThreadTools", "XLSX"]
-git-tree-sha1 = "0bcb60c05a479735494ddfbe965e0fc4223482f8"
+git-tree-sha1 = "597357c05e9b47dc00a757b385e9920a58efddb9"
 repo-rev = "master"
 repo-url = "https://github.com/sbutron/PhotoMC.jl"
 uuid = "8a70790b-5fed-4f35-9cb7-33f7fac92a76"
@@ -604,9 +604,9 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[ProgressMeter]]
 deps = ["Distributed", "Printf"]
-git-tree-sha1 = "d85d8f0339a9937afac93e152c76f4745b386202"
+git-tree-sha1 = "bb4a35eafac4e485335702fb5cea39389dc1a782"
 uuid = "92933f4c-e287-5a05-a399-4b506db050ca"
-version = "1.6.0"
+version = "1.6.1"
 
 [[Qt5Base_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "OpenSSL_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libxcb_jll", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_keysyms_jll", "Xorg_xcb_util_renderutil_jll", "Xorg_xcb_util_wm_jll", "Zlib_jll", "xkbcommon_jll"]

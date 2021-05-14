@@ -35,9 +35,9 @@ version = "1.16.0+6"
 
 [[ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra", "SparseArrays"]
-git-tree-sha1 = "e6b23566e025d3b0d9ccc397f5c7a134af552e27"
+git-tree-sha1 = "9b0375dc013ab0fc472b37cb8b18eed66b83f76b"
 uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-version = "0.9.42"
+version = "0.9.43"
 
 [[ColorSchemes]]
 deps = ["ColorTypes", "Colors", "FixedPointNumbers", "Random", "StaticArrays"]
@@ -72,6 +72,12 @@ deps = ["Crayons", "ExproniconLite", "OrderedCollections", "TOML"]
 git-tree-sha1 = "b8486a417456d2fbbe2af13e24cef459c9f42429"
 uuid = "5218b696-f38b-4ac9-8b61-a12ec717816d"
 version = "0.15.4"
+
+[[ConstructionBase]]
+deps = ["LinearAlgebra"]
+git-tree-sha1 = "1dc43957fb9a1574fa1b7a449e101bd1fd3a9fb7"
+uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
+version = "1.2.1"
 
 [[Contour]]
 deps = ["StaticArrays"]
@@ -152,9 +158,9 @@ uuid = "e2ba6199-217a-4e67-a87a-7c52f15ade04"
 version = "0.1.3"
 
 [[ExproniconLite]]
-git-tree-sha1 = "f6712ae2c1fe027cc7f9437ccc52401426289b89"
+git-tree-sha1 = "c97ce5069033ac15093dc44222e3ecb0d3af8966"
 uuid = "55351af7-c7e9-48d6-89ff-24e801d99491"
-version = "0.6.8"
+version = "0.6.9"
 
 [[EzXML]]
 deps = ["Printf", "XML2_jll"]
@@ -531,8 +537,8 @@ uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
 version = "1.1.0"
 
 [[PhotoMC]]
-deps = ["ACME", "ConvexBodyProximityQueries", "Dates", "DelimitedFiles", "Distributed", "Distributions", "Downloads", "LinearAlgebra", "Plots", "PoissonRandom", "Polynomials", "ProgressMeter", "Random", "RandomNumbers", "SparseArrays", "StaticArrays", "XLSX"]
-git-tree-sha1 = "8753dd0e64a2dfc2499217bd81a2790ec46bd6fa"
+deps = ["ACME", "ConvexBodyProximityQueries", "Dates", "DelimitedFiles", "Distributed", "Distributions", "Downloads", "LinearAlgebra", "Plots", "PoissonRandom", "Polynomials", "ProgressMeter", "Random", "RandomNumbers", "SparseArrays", "StaticArrays", "ThreadTools", "Unitful", "XLSX"]
+git-tree-sha1 = "e0ed29e9d168c89148d6c10564f8b8c544e7c22d"
 repo-rev = "master"
 repo-url = "https://github.com/sbutron/PhotoMC.jl"
 uuid = "8a70790b-5fed-4f35-9cb7-33f7fac92a76"
@@ -702,10 +708,10 @@ deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
 [[SpecialFunctions]]
-deps = ["ChainRulesCore", "OpenSpecFun_jll"]
-git-tree-sha1 = "5919936c0e92cff40e57d0ddf0ceb667d42e5902"
+deps = ["ChainRulesCore", "LogExpFunctions", "OpenSpecFun_jll"]
+git-tree-sha1 = "9146da51b38e9705b9f5ccfadc3ab10a482cae36"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
-version = "1.3.0"
+version = "1.4.0"
 
 [[StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
@@ -778,6 +784,11 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
+[[ThreadTools]]
+git-tree-sha1 = "e335e40d393ccc1e1aa8087632989e856db988e0"
+uuid = "dbf13d8f-d36e-4350-8970-f3a99faba1a8"
+version = "0.2.0"
+
 [[TimeZones]]
 deps = ["Dates", "EzXML", "LazyArtifacts", "Mocking", "Pkg", "Printf", "RecipesBase", "Serialization", "Unicode"]
 git-tree-sha1 = "960099aed321e05ac649c90d583d59c9309faee1"
@@ -795,6 +806,12 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
+
+[[Unitful]]
+deps = ["ConstructionBase", "Dates", "LinearAlgebra", "Random"]
+git-tree-sha1 = "c6bbc170505c5ea36593a0072b61d3be8bf868ae"
+uuid = "1986cc42-f94f-5a68-af5c-568840ba703d"
+version = "1.7.0"
 
 [[Wayland_jll]]
 deps = ["Artifacts", "Expat_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg", "XML2_jll"]

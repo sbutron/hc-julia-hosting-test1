@@ -20,7 +20,7 @@ begin
 	using Distributions
 	using PlutoUI
 	gr()
-	
+
 md"""Loading dependencies"""
 html"""<style>
 main {
@@ -45,7 +45,7 @@ $(@bind photon_input Slider(1:10000, default = 2000, show_value = true)) ph/puls
 Pulse width:
 $(@bind pw_input Slider(1:5000, default = 2000, show_value = true)) ns |
 Pulse delay:
-$(@bind p_delay Slider(1:10000, default = 5000, show_value = true)) ns 
+$(@bind p_delay Slider(1:10000, default = 5000, show_value = true)) ns
 
 Frequency:
 $(@bind p_freq Slider(1:10_000, default = 1, show_value = true)) kHz |
@@ -87,14 +87,14 @@ end
 # ╔═╡ bef78c74-ae9e-437e-b850-4c64a883268d
 begin
 	mppc = S13360_3050CS(
-							env, 
+							env,
 							position = Coordinate(0,0)
 						)
 md"""Add S13360-3050CS (MPPC) to the environment"""
 end
 
 # ╔═╡ 22da75b2-498e-4233-831e-fe2a28c4d9c2
-begin	
+begin
 	ls = FocusedSource(
 						env,
 						pulse_shape = pulse_shape,
@@ -114,8 +114,8 @@ end
 begin
 	r11 = Resistor_Ideal(env, 50, "R11")
 	u1 = OPA846(env)
-	r5 = Resistor_Ideal(env, 51, "R5") 
-	r2 = Resistor_Ideal(env, r2val, "R2") 
+	r5 = Resistor_Ideal(env, 51, "R5")
+	r2 = Resistor_Ideal(env, r2val, "R2")
 	r1 = Resistor_Ideal(env, 51, "R51")
 	current_probe = Probe_Current(env, probe_label = "Anode Current")
 	voltage_probe = Oscilloscope_1MΩ(env, probe_label = "Amplifier Voltage")
@@ -138,8 +138,8 @@ end
 # ╔═╡ db6f19dc-f632-45ec-9651-396a58c47a70
 begin
 	run
-	p = plot(env.stats_time, 
-		env.schematic.stats_probe_outputs[:,2], 
+	p = plot(env.stats_time,
+		env.schematic.stats_probe_outputs[:,2],
 		label = env.schematic.probe_labels[2],
 		xlabel = "Time(s)",
 		ylabel = "Voltage (V)"
